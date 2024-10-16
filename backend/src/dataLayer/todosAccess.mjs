@@ -59,4 +59,16 @@ export class TodosAccess {
     })
     return todos.Items
   }
+
+  async saveImgUrl(userId, todoId, bucketName) {
+      await this.database.update({
+          TableName: this.todos,
+          Key: { userId, todoId },
+          ConditionExpression: 'attribute_exists(todoId)',
+          UpdateExpression: 'set attachmentUrl = :attachmentUrl',
+          ExpressionAttributeValues: {
+            ':attachmentUrl': `https://${bucketName}.s3.amazonaws.com/${todoId}`
+          }
+        });
+    }
 }

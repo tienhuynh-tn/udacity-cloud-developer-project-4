@@ -12,8 +12,7 @@ export const create = async (req, userId) => {
     userId,
     dueDate: req.dueDate,
     createdAt: new Date().toISOString(),
-    done: false,
-    attachmentUrl: `https://${process.env.TODOS_S3_BUCKET}.s3.amazonaws.com/${todoId}`
+    done: false
   })
 }
 
